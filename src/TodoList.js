@@ -18,7 +18,7 @@ export default class TodoList extends Component {
         wannaDelete: {}
     };
 
-    componentDidMount() {}
+    componentDidMount() {} // Пустые методы удалять
 
     deleteList = () => {
         console.log('deleteList');
@@ -84,6 +84,11 @@ export default class TodoList extends Component {
         if (this.state.items.length) {
             itemList = items.map((item, index) => {
                 let id = 'wannaDelete' + index;
+                
+                // ты добавл key еще и в input, это не нужно
+                // key лучше делать уникальный, то есть реально уникальный, например юзать
+                // либу uniqid, а в данном случае у тебя после удаления элемента ключ передастся например
+                // элементу рядом, ибо это просто индекс в массиве
                 return (
                     <li key={id}>
                         <input type="checkbox" key={id} id={id} name="wannaDelete" onChange={this.addWannaDelete(index)} />
