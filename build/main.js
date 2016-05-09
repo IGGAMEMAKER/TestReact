@@ -67,7 +67,7 @@
 	'use strict';
 
 	Object.defineProperty(exports, "__esModule", {
-	  value: true
+	    value: true
 	});
 
 	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
@@ -89,162 +89,162 @@
 	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
 	var TodoList = function (_Component) {
-	  _inherits(TodoList, _Component);
+	    _inherits(TodoList, _Component);
 
-	  function TodoList() {
-	    var _Object$getPrototypeO;
+	    function TodoList() {
+	        var _Object$getPrototypeO;
 
-	    var _temp, _this, _ret;
+	        var _temp, _this, _ret;
 
-	    _classCallCheck(this, TodoList);
+	        _classCallCheck(this, TodoList);
 
-	    for (var _len = arguments.length, args = Array(_len), _key = 0; _key < _len; _key++) {
-	      args[_key] = arguments[_key];
+	        for (var _len = arguments.length, args = Array(_len), _key = 0; _key < _len; _key++) {
+	            args[_key] = arguments[_key];
+	        }
+
+	        return _ret = (_temp = (_this = _possibleConstructorReturn(this, (_Object$getPrototypeO = Object.getPrototypeOf(TodoList)).call.apply(_Object$getPrototypeO, [this].concat(args))), _this), _this.state = {
+	            items: [{ text: 'txttt' }, { text: 'Тудушка' }, { text: 'Тудушка2' }, { text: 'Тудушка3' }],
+	            proposedText: '',
+	            wannaDelete: {}
+	        }, _this.deleteList = function () {
+	            console.log('deleteList');
+
+	            var list = _this.state.wannaDelete;
+	            var wannaDel = Object.keys(list);
+
+	            var obj = [];
+
+	            wannaDel.forEach(function (id, index) {
+	                var isMarked = list[id];
+	                // console.log(id, index, isMarked);
+	                if (isMarked) obj.push(id);
+	            });
+
+	            var items = _this.state.items;
+	            for (var i = obj.length - 1; i >= 0; i--) {
+	                var item = obj[i];
+	                console.log('need to delete ', item);
+	                //this.deleteItem(item);
+	                items.splice(item, 1);
+	            };
+
+	            _this.setState({ wannaDelete: {}, items: items });
+	        }, _this.addItem = function (text) {
+	            return function () {
+	                if (!text) return;
+	                var list = _this.state.items;
+	                list.push({ text: text });
+	                _this.setState({ items: list, proposedText: '' });
+	            };
+	        }, _this.addWannaDelete = function (index) {
+	            return function (event) {
+	                var targ = document.getElementById('wannaDelete' + index).checked;
+	                var was = _this.state.wannaDelete;
+
+	                was[index] = targ;
+	                _this.setState({ wannaDelete: was });
+	            };
+	        }, _this.handleChange = function (event) {
+	            var value = event.target.value;
+	            _this.setState({ proposedText: value });
+	        }, _this.getItemList = function (items) {
+	            var itemList = _react2.default.createElement(
+	                'li',
+	                null,
+	                ' No todos, sorry '
+	            );
+
+	            if (_this.state.items.length) {
+	                itemList = items.map(function (item, index) {
+	                    var id = 'wannaDelete' + index;
+	                    return _react2.default.createElement(
+	                        'li',
+	                        { key: index },
+	                        _react2.default.createElement('input', { type: 'checkbox', id: id, name: 'wannaDelete', onChange: _this.addWannaDelete(index) }),
+	                        _react2.default.createElement(_TodoItem2.default, { item: item }),
+	                        _react2.default.createElement(
+	                            'a',
+	                            { href: '#', onClick: _this.deleteItem(index) },
+	                            ' X '
+	                        )
+	                    );
+	                });
+	            }
+	            return itemList;
+	        }, _this.getDeleteListButton = function () {
+	            var deleteListButton = _react2.default.createElement('input', { type: 'button', value: 'Delete all', onClick: _this.deleteList });
+	            var list = _this.state.wannaDelete;
+	            var wannaDel = Object.keys(list);
+
+	            var deleteList = '';
+
+	            wannaDel.forEach(function (id, index) {
+	                console.log(id, index);
+	                var isMarked = list[id];
+	                if (isMarked) deleteList = deleteListButton;
+	            });
+	            return deleteList;
+	        }, _temp), _possibleConstructorReturn(_this, _ret);
 	    }
-
-	    return _ret = (_temp = (_this = _possibleConstructorReturn(this, (_Object$getPrototypeO = Object.getPrototypeOf(TodoList)).call.apply(_Object$getPrototypeO, [this].concat(args))), _this), _this.state = {
-	      items: [{ text: 'txttt' }, { text: 'Тудушка' }, { text: 'Тудушка2' }, { text: 'Тудушка3' }],
-	      proposedText: '',
-	      wannaDelete: {}
-	    }, _this.deleteList = function () {
-	      console.log('deleteList');
-
-	      var list = _this.state.wannaDelete;
-	      var wannaDel = Object.keys(list);
-
-	      var obj = [];
-
-	      wannaDel.forEach(function (id, index) {
-	        var isMarked = list[id];
-	        // console.log(id, index, isMarked);
-	        if (isMarked) obj.push(id);
-	      });
-
-	      var items = _this.state.items;
-	      for (var i = obj.length - 1; i >= 0; i--) {
-	        var item = obj[i];
-	        console.log('need to delete ', item);
-	        //this.deleteItem(item);
-	        items.splice(item, 1);
-	      };
-
-	      _this.setState({ wannaDelete: {}, items: items });
-	    }, _this.addItem = function (text) {
-	      return function () {
-	        if (!text) return;
-	        var list = _this.state.items;
-	        list.push({ text: text });
-	        _this.setState({ items: list, proposedText: '' });
-	      };
-	    }, _this.addWannaDelete = function (index) {
-	      return function (event) {
-	        var targ = document.getElementById('wannaDelete' + index).checked;
-	        var was = _this.state.wannaDelete;
-
-	        was[index] = targ;
-	        _this.setState({ wannaDelete: was });
-	      };
-	    }, _this.handleChange = function (event) {
-	      var value = event.target.value;
-	      _this.setState({ proposedText: value });
-	    }, _temp), _possibleConstructorReturn(_this, _ret);
-	  }
-	  /* constructor(props) {
-	      super(props);
-	      this.
-	      let context = this;
-	  }*/
+	    /* constructor(props) {
+	     super(props);
+	     this.
+	     let context = this;
+	     }*/
 
 
-	  _createClass(TodoList, [{
-	    key: 'componentDidMount',
-	    value: function componentDidMount() {}
-	  }, {
-	    key: 'deleteItem',
-	    value: function deleteItem(index) {
-	      var _this2 = this;
+	    _createClass(TodoList, [{
+	        key: 'componentDidMount',
+	        value: function componentDidMount() {}
+	    }, {
+	        key: 'deleteItem',
+	        value: function deleteItem(index) {
+	            var _this2 = this;
 
-	      return function () {
-	        var list = _this2.state.items;
-	        list.splice(index, 1);
-	        _this2.setState({ items: list });
-	      };
-	    }
-	  }, {
-	    key: 'render',
-	    value: function render() {
-	      var _this3 = this;
+	            return function () {
+	                var list = _this2.state.items;
+	                list.splice(index, 1);
+	                _this2.setState({ items: list });
+	            };
+	        }
+	    }, {
+	        key: 'render',
+	        value: function render() {
+	            var items = this.state.items;
+	            var itemList = this.getItemList(items);
 
-	      var items = this.state.items;
-	      var itemList;
+	            var addItemButton = _react2.default.createElement(
+	                'div',
+	                null,
+	                _react2.default.createElement('input', { id: 'textField', type: 'text', onChange: this.handleChange, value: this.state.proposedText }),
+	                _react2.default.createElement('input', { type: 'submit', value: 'Add', onClick: this.addItem(this.state.proposedText) })
+	            );
 
-	      var deleteListButton = _react2.default.createElement('input', { type: 'button', value: 'Delete all', onClick: this.deleteList });
+	            var deleteListButton = this.getDeleteListButton();
 
-	      var list = this.state.wannaDelete;
-	      var wannaDel = Object.keys(list);
-	      var deleteList = '';
+	            return _react2.default.createElement(
+	                'div',
+	                null,
+	                _react2.default.createElement(
+	                    'ul',
+	                    null,
+	                    itemList
+	                ),
+	                _react2.default.createElement(
+	                    'div',
+	                    null,
+	                    addItemButton
+	                ),
+	                _react2.default.createElement(
+	                    'div',
+	                    null,
+	                    deleteListButton
+	                )
+	            );
+	        }
+	    }]);
 
-	      wannaDel.forEach(function (id, index) {
-	        console.log(id, index);
-	        var isMarked = list[id];
-	        if (isMarked) deleteList = deleteListButton;
-	      });
-
-	      /*<input type="submit" value="Add" onClick={this.addItem.bind(this, 0, this.state.proposedText, 'tratata')} />*/
-	      var text = this.state.proposedText;
-	      var addItem = _react2.default.createElement(
-	        'div',
-	        null,
-	        _react2.default.createElement('input', { id: 'textField', type: 'text', onChange: this.handleChange, value: text }),
-	        _react2.default.createElement('input', { type: 'submit', value: 'Add', onClick: this.addItem(text) })
-	      );
-
-	      if (this.state.items.length) {
-	        itemList = items.map(function (item, index) {
-	          var id = 'wannaDelete' + index;
-	          return _react2.default.createElement(
-	            'li',
-	            { key: index },
-	            _react2.default.createElement('input', { type: 'checkbox', id: id, name: 'wannaDelete', onChange: _this3.addWannaDelete(index) }),
-	            _react2.default.createElement(_TodoItem2.default, { item: item }),
-	            _react2.default.createElement(
-	              'a',
-	              { href: '#', onClick: _this3.deleteItem(index) },
-	              ' X '
-	            )
-	          );
-	        });
-	      } else {
-	        itemList = _react2.default.createElement(
-	          'li',
-	          null,
-	          ' No todos, sorry '
-	        );
-	      }
-
-	      return _react2.default.createElement(
-	        'div',
-	        null,
-	        _react2.default.createElement(
-	          'ul',
-	          null,
-	          itemList
-	        ),
-	        _react2.default.createElement(
-	          'div',
-	          null,
-	          addItem
-	        ),
-	        _react2.default.createElement(
-	          'div',
-	          null,
-	          deleteList
-	        )
-	      );
-	    }
-	  }]);
-
-	  return TodoList;
+	    return TodoList;
 	}(_react.Component);
 
 	exports.default = TodoList;
