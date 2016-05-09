@@ -114,9 +114,8 @@
 
 	            var obj = [];
 
-	            wannaDel.forEach(function (id, index) {
+	            wannaDel.forEach(function (id) {
 	                var isMarked = list[id];
-	                // console.log(id, index, isMarked);
 	                if (isMarked) obj.push(id);
 	            });
 
@@ -147,7 +146,8 @@
 	        }, _this.handleChange = function (event) {
 	            var value = event.target.value;
 	            _this.setState({ proposedText: value });
-	        }, _this.getItemList = function (items) {
+	        }, _this.getItemList = function () {
+	            var items = _this.state.items;
 	            var itemList = _react2.default.createElement(
 	                'li',
 	                null,
@@ -161,7 +161,7 @@
 	                        'li',
 	                        { key: index },
 	                        _react2.default.createElement('input', { type: 'checkbox', id: id, name: 'wannaDelete', onChange: _this.addWannaDelete(index) }),
-	                        _react2.default.createElement(_TodoItem2.default, { item: item }),
+	                        _react2.default.createElement(_TodoItem2.default, { item: item, key: index }),
 	                        _react2.default.createElement(
 	                            'a',
 	                            { href: '#', onClick: _this.deleteItem(index) },
@@ -173,10 +173,10 @@
 	            return itemList;
 	        }, _this.getDeleteListButton = function () {
 	            var deleteListButton = _react2.default.createElement('input', { type: 'button', value: 'Delete all', onClick: _this.deleteList });
+	            var deleteList = '';
+
 	            var list = _this.state.wannaDelete;
 	            var wannaDel = Object.keys(list);
-
-	            var deleteList = '';
 
 	            wannaDel.forEach(function (id, index) {
 	                console.log(id, index);
@@ -210,8 +210,9 @@
 	    }, {
 	        key: 'render',
 	        value: function render() {
-	            var items = this.state.items;
-	            var itemList = this.getItemList(items);
+
+	            var itemList = this.getItemList();
+	            var deleteListButton = this.getDeleteListButton();
 
 	            var addItemButton = _react2.default.createElement(
 	                'div',
@@ -219,8 +220,6 @@
 	                _react2.default.createElement('input', { id: 'textField', type: 'text', onChange: this.handleChange, value: this.state.proposedText }),
 	                _react2.default.createElement('input', { type: 'submit', value: 'Add', onClick: this.addItem(this.state.proposedText) })
 	            );
-
-	            var deleteListButton = this.getDeleteListButton();
 
 	            return _react2.default.createElement(
 	                'div',

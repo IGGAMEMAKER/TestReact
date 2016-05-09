@@ -18,8 +18,7 @@ export default class TodoList extends Component {
         wannaDelete: {}
     };
 
-    componentDidMount() {
-    }
+    componentDidMount() {}
 
     deleteList = () => {
         console.log('deleteList');
@@ -29,9 +28,8 @@ export default class TodoList extends Component {
 
         let obj = [];
 
-        wannaDel.forEach(function (id, index) {
+        wannaDel.forEach((id) => {
             let isMarked = list[id];
-            // console.log(id, index, isMarked);
             if (isMarked) obj.push(id);
         });
 
@@ -79,7 +77,8 @@ export default class TodoList extends Component {
     };
 
 
-    getItemList = (items) => {
+    getItemList = () => {
+        let items = this.state.items;
         let itemList = <li> No todos, sorry </li>;
 
         if (this.state.items.length) {
@@ -88,7 +87,7 @@ export default class TodoList extends Component {
                 return (
                     <li key={index}>
                         <input type="checkbox" id={id} name="wannaDelete"  onChange={this.addWannaDelete(index)} />
-                        <TodoItem item={item} />
+                        <TodoItem item={item} key={index}/>
                         <a href="#" onClick={this.deleteItem(index)}> X </a>
                     </li>
                 );
@@ -99,10 +98,10 @@ export default class TodoList extends Component {
 
     getDeleteListButton = () => {
         const deleteListButton = <input type="button" value="Delete all" onClick={this.deleteList} />;
+        let deleteList = '';
+
         let list = this.state.wannaDelete;
         let wannaDel = Object.keys(list);
-
-        let deleteList = '';
 
         wannaDel.forEach(function (id, index) {
             console.log(id, index);
@@ -113,17 +112,16 @@ export default class TodoList extends Component {
     };
 
     render() {
-        let items = this.state.items;
-        let itemList = this.getItemList(items);
 
-        var addItemButton = (
+        let itemList = this.getItemList();
+        let deleteListButton = this.getDeleteListButton();
+
+        let addItemButton = (
             <div>
                 <input id="textField" type="text" onChange={this.handleChange} value={this.state.proposedText} />
                 <input type="submit" value="Add" onClick={this.addItem(this.state.proposedText)} />
             </div>
         );
-
-        let deleteListButton = this.getDeleteListButton();
 
         return (
             <div>
