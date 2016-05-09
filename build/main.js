@@ -138,6 +138,7 @@
 	        }, _this.addWannaDelete = function (index) {
 	            return function (event) {
 	                var targ = document.getElementById('wannaDelete' + index).checked;
+
 	                var was = _this.state.wannaDelete;
 
 	                was[index] = targ;
@@ -159,9 +160,9 @@
 	                    var id = 'wannaDelete' + index;
 	                    return _react2.default.createElement(
 	                        'li',
-	                        { key: index },
-	                        _react2.default.createElement('input', { type: 'checkbox', id: id, name: 'wannaDelete', onChange: _this.addWannaDelete(index) }),
-	                        _react2.default.createElement(_TodoItem2.default, { item: item, key: index }),
+	                        { key: id },
+	                        _react2.default.createElement('input', { type: 'checkbox', key: id, id: id, name: 'wannaDelete', onChange: _this.addWannaDelete(index) }),
+	                        _react2.default.createElement(_TodoItem2.default, { item: item }),
 	                        _react2.default.createElement(
 	                            'a',
 	                            { href: '#', onClick: _this.deleteItem(index) },
@@ -210,7 +211,6 @@
 	    }, {
 	        key: 'render',
 	        value: function render() {
-
 	            var itemList = this.getItemList();
 	            var deleteListButton = this.getDeleteListButton();
 

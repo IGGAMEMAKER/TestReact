@@ -64,6 +64,7 @@ export default class TodoList extends Component {
     addWannaDelete = (index) => {
         return (event) => {
             let targ = document.getElementById('wannaDelete' + index).checked;
+
             let was = this.state.wannaDelete;
 
             was[index] = targ;
@@ -76,7 +77,6 @@ export default class TodoList extends Component {
         this.setState({ proposedText: value });
     };
 
-
     getItemList = () => {
         let items = this.state.items;
         let itemList = <li> No todos, sorry </li>;
@@ -85,9 +85,9 @@ export default class TodoList extends Component {
             itemList = items.map((item, index) => {
                 let id = 'wannaDelete' + index;
                 return (
-                    <li key={index}>
-                        <input type="checkbox" id={id} name="wannaDelete"  onChange={this.addWannaDelete(index)} />
-                        <TodoItem item={item} key={index}/>
+                    <li key={id}>
+                        <input type="checkbox" key={id} id={id} name="wannaDelete" onChange={this.addWannaDelete(index)} />
+                        <TodoItem item={item} />
                         <a href="#" onClick={this.deleteItem(index)}> X </a>
                     </li>
                 );
@@ -112,7 +112,6 @@ export default class TodoList extends Component {
     };
 
     render() {
-
         let itemList = this.getItemList();
         let deleteListButton = this.getDeleteListButton();
 
