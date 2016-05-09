@@ -9,14 +9,15 @@ export default class TodoList extends Component {
     }*/
   state = {
     items: [
-            { text: 'txttt', index: 0 },
-            { text: 'Тудушка', index: 1 },
-            { text: 'Тудушка2', index: 2 },
-            { text: 'Тудушка3', index: 3 }
+        { text: 'txttt' },
+        { text: 'Тудушка' },
+        { text: 'Тудушка2' },
+        { text: 'Тудушка3' }
     ],
     proposedText: '',
     wannaDelete: {}
   };
+
   componentDidMount() {
   }
 
@@ -50,13 +51,12 @@ export default class TodoList extends Component {
         if (!text) return;
         let list = this.state.items;
         list.push({ text });
-        this.setState({ items: list , proposedText:'' });
+        this.setState({ items: list, proposedText: '' });
     };
   };
 
   deleteItem(index) {
       return () => {
-          // var index = 0;
           let list = this.state.items;
           list.splice(index, 1);
           this.setState({ items: list });
@@ -101,7 +101,7 @@ export default class TodoList extends Component {
             <input id="textField" type="text" onChange={this.handleChange} value={text} />
             <input type="submit" value="Add" onClick={this.addItem(text)} />
         </div>
-    );
+      );
 
     if (this.state.items.length) {
         itemList = items.map((item, index) => {

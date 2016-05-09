@@ -103,7 +103,7 @@
 	    }
 
 	    return _ret = (_temp = (_this = _possibleConstructorReturn(this, (_Object$getPrototypeO = Object.getPrototypeOf(TodoList)).call.apply(_Object$getPrototypeO, [this].concat(args))), _this), _this.state = {
-	      items: [{ text: 'txttt', index: 0 }, { text: 'Тудушка', index: 1 }, { text: 'Тудушка2', index: 2 }, { text: 'Тудушка3', index: 3 }],
+	      items: [{ text: 'txttt' }, { text: 'Тудушка' }, { text: 'Тудушка2' }, { text: 'Тудушка3' }],
 	      proposedText: '',
 	      wannaDelete: {}
 	    }, _this.deleteList = function () {
@@ -165,7 +165,6 @@
 	      var _this2 = this;
 
 	      return function () {
-	        // var index = 0;
 	        var list = _this2.state.items;
 	        list.splice(index, 1);
 	        _this2.setState({ items: list });
