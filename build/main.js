@@ -103,7 +103,7 @@
 	        }
 
 	        return _ret = (_temp = (_this = _possibleConstructorReturn(this, (_Object$getPrototypeO = Object.getPrototypeOf(TodoList)).call.apply(_Object$getPrototypeO, [this].concat(args))), _this), _this.state = {
-	            items: [{ text: 'txttt' }, { text: 'Тудушка' }, { text: 'Тудушка2' }, { text: 'Тудушка3' }],
+	            items: [{ text: 'txttt', key: 0 }, { text: 'Тудушка', key: 1 }, { text: 'Тудушка2', key: 2 }, { text: 'Тудушка3', key: 3 }],
 	            proposedText: '',
 	            wannaDelete: {}
 	        }, _this.deleteList = function () {
@@ -128,11 +128,13 @@
 	            };
 
 	            _this.setState({ wannaDelete: {}, items: items });
+	        }, _this.getUniqueKey = function () {
+	            return new Date() + '';
 	        }, _this.addItem = function (text) {
 	            return function () {
 	                if (!text) return;
 	                var list = _this.state.items;
-	                list.push({ text: text });
+	                list.push({ text: text, key: _this.getUniqueKey() });
 	                _this.setState({ items: list, proposedText: '' });
 	            };
 	        }, _this.addWannaDelete = function (index) {
@@ -158,10 +160,13 @@
 	            if (_this.state.items.length) {
 	                itemList = items.map(function (item, index) {
 	                    var id = 'wannaDelete' + index;
+	                    // let key = index;//+'_'+new Date();
+	                    var key = item.key;
+	                    // console.log(key);
 	                    return _react2.default.createElement(
 	                        'li',
-	                        { key: id },
-	                        _react2.default.createElement('input', { type: 'checkbox', key: id, id: id, name: 'wannaDelete', onChange: _this.addWannaDelete(index) }),
+	                        { key: key },
+	                        _react2.default.createElement('input', { type: 'checkbox', id: id, name: 'wannaDelete', onChange: _this.addWannaDelete(index) }),
 	                        _react2.default.createElement(_TodoItem2.default, { item: item }),
 	                        _react2.default.createElement(
 	                            'a',
@@ -195,9 +200,6 @@
 
 
 	    _createClass(TodoList, [{
-	        key: 'componentDidMount',
-	        value: function componentDidMount() {}
-	    }, {
 	        key: 'deleteItem',
 	        value: function deleteItem(index) {
 	            var _this2 = this;

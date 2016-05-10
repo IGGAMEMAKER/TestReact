@@ -9,16 +9,14 @@ export default class TodoList extends Component {
      }*/
     state = {
         items: [
-            { text: 'txttt' },
-            { text: 'Тудушка' },
-            { text: 'Тудушка2' },
-            { text: 'Тудушка3' }
+            { text: 'txttt' , key: 0 },
+            { text: 'Тудушка', key: 1 },
+            { text: 'Тудушка2', key: 2 },
+            { text: 'Тудушка3', key: 3 },
         ],
         proposedText: '',
         wannaDelete: {}
     };
-
-    componentDidMount() {}
 
     deleteList = () => {
         console.log('deleteList');
@@ -43,12 +41,14 @@ export default class TodoList extends Component {
 
         this.setState({ wannaDelete: {}, items });
     };
-
+    getUniqueKey = () => {
+        return new Date() + '';
+    }
     addItem = (text) => {
         return () => {
             if (!text) return;
             let list = this.state.items;
-            list.push({ text });
+            list.push({ text, key: this.getUniqueKey() });
             this.setState({ items: list, proposedText: '' });
         };
     };
@@ -84,9 +84,12 @@ export default class TodoList extends Component {
         if (this.state.items.length) {
             itemList = items.map((item, index) => {
                 let id = 'wannaDelete' + index;
+                // let key = index;//+'_'+new Date();
+                let key = item.key;
+                // console.log(key);
                 return (
-                    <li key={id}>
-                        <input type="checkbox" key={id} id={id} name="wannaDelete" onChange={this.addWannaDelete(index)} />
+                    <li key={key}>
+                        <input type="checkbox" id={id} name="wannaDelete" onChange={this.addWannaDelete(index)} />
                         <TodoItem item={item} />
                         <a href="#" onClick={this.deleteItem(index)}> X </a>
                     </li>
